@@ -14,8 +14,9 @@ final class ClienteDao extends Dao {
         try {
            
                 
-                    $sql = "INSERT INTO CLIENTES (NOME, PHONE) VALUES (:nome, :phone)";
+                    $sql = "INSERT INTO CLIENTES (NOME, PHONE) VALUES (:id, :nome, :phone)";
                     $stm = $this->pdo->prepare($sql);
+                    $stm->bindValue(':id', $clients['id']);
                     $stm->bindValue(':nome', $clients['nome']);
                     $stm->bindValue(':phone', $clients['phone']);
                     $stm->execute();
