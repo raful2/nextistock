@@ -19,8 +19,8 @@ final class UserDAO extends Dao {
                     $stm->bindParam(1, $user['email']);
                     $stm->bindValue(2, $user['pw']);
                     $stm->execute();
-                    $data = $stm->fetch();
-                    if(empty($data['name'])){
+                    $datac = $stm->rowCount();
+                    if($datac < 1){
                         return array(
                             "result"=>0
                         );

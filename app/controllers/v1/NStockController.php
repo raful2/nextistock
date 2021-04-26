@@ -59,7 +59,7 @@ final class NStockController extends CoreController
 
         }
 
-        return $res->withStatus(200);
+       
 
     }
 
