@@ -20,13 +20,13 @@ final class UserDAO extends Dao {
                     $stm->bindValue(':pw', $user['pw']);
                     $stm->execute();
                     $datac = $stm->rowCount();
-                    $datad = $stm->fetchAll();
+                   
                     if($datac < 1){
                         return array(
                             "result"=>0
                         );
                     }else{
-
+                        $datad = $stm->fetch();
                         return array(
                             "result"=>1,
                             "name"=>$datad['name']
