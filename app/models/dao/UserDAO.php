@@ -25,9 +25,11 @@ final class UserDAO extends Dao {
                             "result"=>0
                         );
                     }else{
+                        $datad = $stm->fetch();
+
                         return array(
                             "result"=>1,
-                            "name"=>$data['name']
+                            "name"=>$datad['name']
                         );
                     }
 
