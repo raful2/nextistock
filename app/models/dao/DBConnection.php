@@ -10,7 +10,7 @@ class DBConnection {
     
     private function __construct(string $host, string $dbName, string $user, string $password, string $port) {
         try {
-            $this->conn = new PDO("mysql:host=$host;port=$port;dbname=$dbName;charset=utf8", $user, $password);
+            $this->conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbName;", $user, $password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 

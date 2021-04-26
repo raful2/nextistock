@@ -3,7 +3,7 @@
 namespace Config;
 
 use Slim\App;
-use Controllers\V1\OnairamController;
+use Controllers\V1\NStockController;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Views\PhpRenderer as Render;
@@ -28,7 +28,7 @@ final class Routes {
         $app = $this->app;
 
         $app->group("/v1", function() use ($app){
-            $str = explode('\\',__DIR__,-1);
+            $str = explode('\\',__DIR__,-1);    
             $viewPath = $str[0]."\\".$str[1]."\\".$str[2]."\\".$str[3]."\\".$str[4]."/views";
                 $view = new Render($viewPath);
                 
@@ -38,21 +38,18 @@ final class Routes {
                 // $new = str_split($str,-1);
                 return $rs->withStatus(200)->withJson($str);
             });
-            $app->post("/clientes", [OnairamController::class,  "saveClients"]);   
+           
+            $app->post("/login/do", [NStockController::class,  "login"]);   
 
             /* Métodos POST */
             $app->get("/", function(Request $rq,Response $rs, $args=[]) use ($view){
                 
                 
                 return $view->render($rs,
-                                    'index.html', ["user"=>
-                                                        [
-                                                            "name"=>"raful"
-                                                        ]
-                ]);
-            });
-            
-            
+                                    'index.html', 
+                                    ["name"=>"raful"]
+                );
+            });  
         });
     }
 }
