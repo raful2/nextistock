@@ -14,18 +14,18 @@ final class UserDAO extends Dao {
         try {
            
             
-                    $sql = "SELECT name FROM public.users WHERE email = ? AND pw = ?";
+                    $sql = "SELECT name FROM public.users WHERE email = :email AND pw = :pw";
                     $stm = $this->pdo->prepare($sql);
-                    $stm->bindParam(1, $user['email']);
-                    $stm->bindValue(2, $user['pw']);
+                    $stm->bindValue(':email', $user['email']);
+                    $stm->bindValue(':pw', $user['pw']);
                     $stm->execute();
                     $datac = $stm->rowCount();
+                    $datad = $stm->fetchAll();
                     if($datac < 1){
                         return array(
                             "result"=>0
                         );
                     }else{
-                        $datad = $stm->fetch();
 
                         return array(
                             "result"=>1,
