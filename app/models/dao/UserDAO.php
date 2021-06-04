@@ -11,7 +11,7 @@ final class UserDAO extends Dao {
     public function update($obj) { throw new Exception("Não precisa implementar"); }
     public function delete(int $idObj) { throw new Exception("Não precisa implementar"); }
     public function newUser(array $user){
-        $sql = "INSERT INTO public.users2( name, email, pw) VALUES (?,?,?);"
+        $sql = "INSERT INTO public.users2( name, email, pw) VALUES (?,?,?);";
     }
     public function login(array $user){
         try {
