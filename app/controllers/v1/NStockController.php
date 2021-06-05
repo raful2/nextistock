@@ -36,7 +36,29 @@ final class NStockController extends CoreController
 
         return $res->withStatus(200)->withJson($dados);
     }
+    public static function newuser(Request $req, Response $res, array $args){
+        $dados = $req->getParsedBody();
+        if(empty($dados['name']) || empty($dados['email']) || empty($dados['pw']) ){
+            return $res->withStatus(401)->withJson(
+                [
+                    "result" => "Fail",
+                    "reason" => "The data must not be empty"
+                ]
+            );
 
+        }else{
+            $newUser = new UserDAO();
+            $result = $newUser->newUser($dados);
+            return $res->withStatus(401)->withJson(
+                [
+                    "result" => "success",
+                    "reason" => "User ".$dados['name']." registered successfuly"
+                ]
+            );
+        }
+        
+        
+    }
     public static function login(Request $req, Response $res, array $args)
     {
         $dados = $req->getParsedBody();

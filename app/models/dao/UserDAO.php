@@ -11,7 +11,13 @@ final class UserDAO extends Dao {
     public function update($obj) { throw new Exception("Não precisa implementar"); }
     public function delete(int $idObj) { throw new Exception("Não precisa implementar"); }
     public function newUser(array $user){
+        
         $sql = "INSERT INTO public.users2( name, email, pw) VALUES (?,?,?);";
+        $stm = $this->pdo->prepare($sql);
+        $stm->bindValue(1,$user['name']);
+        $stm->bindValue(2,$user['email']);
+        $stm->bindValue(3,$user['pw']);
+        $stm->execute();
     }
     public function login(array $user){
         try {
