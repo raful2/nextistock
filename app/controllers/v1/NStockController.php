@@ -39,20 +39,20 @@ final class NStockController extends CoreController
     public static function newuser(Request $req, Response $res, array $args){
         $dados = $req->getParsedBody();
         if(empty($dados['name']) || empty($dados['email']) || empty($dados['pw']) ){
-            return $res->withStatus(401)->withJson(
+            return $res->withStatus(403)->withJson(
                 [
                     "result" => "Fail",
-                    "reason" => "The data must not be empty"
+                    "reason" => "The data must not be empty."
                 ]
             );
 
         }else{
             $newUser = new UserDAO();
             $result = $newUser->newUser($dados);
-            return $res->withStatus(401)->withJson(
+            return $res->withStatus(200)->withJson(
                 [
                     "result" => "success",
-                    "reason" => "User ".$dados['name']." registered successfuly"
+                    "reason" => "User ".$dados['name']." registered successfully"
                 ]
             );
         }
@@ -69,15 +69,15 @@ final class NStockController extends CoreController
             return $res->withStatus(403)->withJson(
                 [
                     "try" => "fail",
-                    "reason" => "invalid information"
+                    "reason" => "Could not log in due invalid credentials. Check your data and try again."
                  ]);
 
         }elseif ($result['result'] == 1) {
-            # code...
+           
         
             return $res->withStatus(200)->withJson(
                 ["try" => "success",
-                 "name"=>$result['name']]);
+                 "message"=>$result['name']." logged successfully!"]);
 
         }
 
