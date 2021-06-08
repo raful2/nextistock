@@ -41,6 +41,7 @@ final class Routes {
            
             $app->post("/login/do", [NStockController::class,  "login"]);   
             $app->post("/newuser/do", [NStockController::class,  "newuser"]);   
+            $app->get("/myproducts/list", [NStockController::class,  "myprods"]);   
 
             /* Métodos POST */
             $app->get("/", function(Request $rq,Response $rs, $args=[]) use ($view){

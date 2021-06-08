@@ -30,15 +30,15 @@ final class NStockController extends CoreController
 
     public static function getStatus(Request $req, Response $res, array $args)
     {
-        $dados = [
+        $data = [
             "status" => "Serviço disponível WS3"
         ];
 
-        return $res->withStatus(200)->withJson($dados);
+        return $res->withStatus(200)->withJson($data);
     }
     public static function newuser(Request $req, Response $res, array $args){
-        $dados = $req->getParsedBody();
-        if(empty($dados['name']) || empty($dados['email']) || empty($dados['pw']) ){
+        $data = $req->getParsedBody();
+        if(empty($data['name']) || empty($data['email']) || empty($data['pw']) ){
             return $res->withStatus(403)->withJson(
                 [
                     "result" => "Fail",
@@ -48,23 +48,36 @@ final class NStockController extends CoreController
 
         }else{
             $newUser = new UserDAO();
-            $result = $newUser->newUser($dados);
+            $result = $newUser->newUser($data);
             return $res->withStatus(200)->withJson(
                 [
-                    "result" => "success",
-                    "reason" => "User ".$dados['name']." registered successfully"
+                    "result" => "Success",
+                    "reason" => "User ".$data['name']." registered successfully"
                 ]
             );
         }
         
         
     }
+    public static function myprods(Request $req, Response $res, array $args)
+    {
+        $data = $req->getParsedBody();
+        if(empty($data['iduser'])){
+            return $res->withStatus(404)->withJson([
+                "error"=>"could not bring the user data"
+            ]);
+        }
+        $myitens = new UserDAO();
+        $result = $myitens->myProducts($data);
+        return $res->withStatus(200)->withJson($result);
+
+    }
     public static function login(Request $req, Response $res, array $args)
     {
-        $dados = $req->getParsedBody();
+        $data = $req->getParsedBody();
         
         $login = new UserDAO();
-        $result = $login->login($dados);
+        $result = $login->login($data);
         if($result['result'] == 0){
             return $res->withStatus(403)->withJson(
                 [
