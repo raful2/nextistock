@@ -21,16 +21,17 @@ final class UserDAO extends Dao {
                 return array([
                     "result"=>"fail",
                     "reason"=>"User ".$user['email']." is already registered"]);
-            }
-        $sql = "INSERT INTO public.users2( name, email, pw) VALUES (?,?,?);";
-        $stm = $this->pdo->prepare($sql);
-        $stm->bindValue(1,$user['name']);
-        $stm->bindValue(2,$user['email']);
-        $stm->bindValue(3,$user['pw']);
-        $stm->execute();
-        return array([
-            "result"=>"success",
-            "reason"=>"User ".$user['email']." registered successfully!"]);
+            }else {
+                sql = "INSERT INTO public.users2( name, email, pw) VALUES (?,?,?);";
+                $stm = $this->pdo->prepare($sql);
+                $stm->bindValue(1,$user['name']);
+                $stm->bindValue(2,$user['email']);
+                $stm->bindValue(3,$user['pw']);
+                $stm->execute();
+                return array([
+                    "result"=>"success",
+                    "reason"=>"User ".$user['email']." registered successfully!"]);            }
+        $
     }catch(\Throwable $th){
         echo $th;
 
