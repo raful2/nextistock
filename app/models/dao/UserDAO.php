@@ -22,7 +22,7 @@ final class UserDAO extends Dao {
                     "result"=>"fail",
                     "reason"=>"User ".$user['email']." is already registered"]);
             }else {
-                sql = "INSERT INTO public.users2( name, email, pw) VALUES (?,?,?);";
+                $sql = "INSERT INTO public.users2( name, email, pw) VALUES (?,?,?);";
                 $stm = $this->pdo->prepare($sql);
                 $stm->bindValue(1,$user['name']);
                 $stm->bindValue(2,$user['email']);
