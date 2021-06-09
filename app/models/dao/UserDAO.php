@@ -31,7 +31,7 @@ final class UserDAO extends Dao {
                 return array([
                     "result"=>"success",
                     "reason"=>"User ".$user['email']." registered successfully!"]);            }
-        $
+        
     }catch(\Throwable $th){
         echo $th;
 
