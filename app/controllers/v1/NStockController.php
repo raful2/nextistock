@@ -51,8 +51,8 @@ final class NStockController extends CoreController
             $result = $newUser->newUser($data);
             return $res->withStatus(200)->withJson(
                 [
-                    "result" => "Success",
-                    "reason" => "User ".$data['name']." registered successfully"
+                    "result" => $result[0]['result'],
+                    "reason" => $result[0]['reason']
                 ]
             );
         }
